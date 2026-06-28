@@ -9,6 +9,7 @@
  */
 
 import { BRAND_COLOR, BRAND_COLOR_LIGHT, ERROR, GRAY_200, GRAY_500, WHITE } from '@/common/colors';
+import { getRH } from '@/common/helpers';
 import { Spacing } from '@/common/spacing';
 import { FontSize } from '@/common/typography';
 import { SemiBoldText } from '@/components/ui/text';
@@ -212,11 +213,14 @@ export const IconButton = ({
 );
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
+//
+// Heights use getRH() so they scale with the screen, but we clamp with
+// Math.max to prevent them from collapsing on very small devices.
 
 const styles = StyleSheet.create({
   fullWidth: {
     width: '100%',
-    height: 52,
+    height: Math.max(48, getRH(52)),
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
@@ -224,7 +228,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   medium: {
-    height: 44,
+    height: Math.max(40, getRH(44)),
     paddingHorizontal: Spacing.xl,
     borderRadius: 10,
     alignItems: 'center',
@@ -234,7 +238,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   small: {
-    height: 32,
+    height: Math.max(28, getRH(32)),
     paddingHorizontal: Spacing.md,
     borderRadius: 8,
     alignItems: 'center',

@@ -13,19 +13,20 @@
 import { BRAND_COLOR, GRAY_500, NEAR_BLACK, WHITE } from '@/common/colors';
 import { getRH, getRW } from '@/common/helpers';
 import { Spacing } from '@/common/spacing';
+import { FontSize } from '@/common/typography';
 import { BoldText, RegularText, SemiBoldText } from '@/components/ui/text';
 import { useNavigation } from 'expo-router';
 import React, { ReactElement } from 'react';
 import {
-    Image,
-    ImageSourcePropType,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    TouchableOpacity,
-    View,
-    ViewStyle,
+  Image,
+  ImageSourcePropType,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -171,7 +172,7 @@ export const PageHeaderWithGoback: React.FC<PageHeaderWithGobackProps> = ({
               resizeMode="contain"
             />
           )}
-          <SemiBoldText color={BRAND_COLOR} fontSize={14} style={{ marginLeft: image ? 6 : 0 }}>
+          <SemiBoldText color={BRAND_COLOR} fontSize={FontSize.sm} style={{ marginLeft: image ? 6 : 0 }}>
             {buttonLabel}
           </SemiBoldText>
         </View>
@@ -191,7 +192,7 @@ export const PageHeaderWithGoback: React.FC<PageHeaderWithGobackProps> = ({
           <Separator width={Spacing.base} height={0} />
           <View style={styles.titleGroup}>
             <BoldText
-              fontSize={28}
+              fontSize={FontSize.xxl}
               color={NEAR_BLACK}
               style={centerText ? { textAlign: 'center' } : undefined}
               numberOfLines={1}
@@ -204,7 +205,7 @@ export const PageHeaderWithGoback: React.FC<PageHeaderWithGobackProps> = ({
               ? typeof subLabel === 'string'
                 ? (
                   <RegularText
-                    fontSize={14}
+                    fontSize={FontSize.sm}
                     color={GRAY_500}
                     style={centerText ? { textAlign: 'center' } : undefined}
                   >

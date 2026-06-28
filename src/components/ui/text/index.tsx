@@ -1,22 +1,27 @@
 /**
  * Text primitives
  *
+ * Every component:
+ *  - uses getRW()-scaled FontSize values (width-responsive)
+ *  - sets maxFontSizeMultiplier so OS accessibility scaling can't break layouts
+ *
  * Usage:
  *   <Heading>Title</Heading>
  *   <SubHeading>Section label</SubHeading>
  *   <Paragraph>Body copy</Paragraph>
  *   <SmallText>Caption</SmallText>
+ *   <SmallHeader>OVERLINE</SmallHeader>
  *   <BoldText>Bold</BoldText>
  *   <SemiBoldText>Semi</SemiBoldText>
  *   <RegularText>Regular</RegularText>
  */
 
 import { GRAY_500, NEAR_BLACK } from '@/common/colors';
-import { FontSize, LineHeight } from '@/common/typography';
+import { FontSize, LineHeight, MAX_FONT_SCALE } from '@/common/typography';
 import React from 'react';
 import { StyleSheet, Text, TextProps, TextStyle } from 'react-native';
 
-// ─── Base ─────────────────────────────────────────────────────────────────────
+// ─── Base interface ───────────────────────────────────────────────────────────
 
 interface AppTextProps extends TextProps {
   color?: string;
@@ -35,6 +40,7 @@ export const BoldText = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[{ color, fontSize, fontWeight: '700' }, style]}
     {...rest}
   >
@@ -50,6 +56,7 @@ export const SemiBoldText = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[{ color, fontSize, fontWeight: '600' }, style]}
     {...rest}
   >
@@ -65,6 +72,7 @@ export const RegularText = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[{ color, fontSize, fontWeight: '400' }, style]}
     {...rest}
   >
@@ -76,7 +84,7 @@ export const RegularText = ({
 
 /**
  * Page / section heading — large, bold.
- * Default: 28px bold
+ * Default: ~28px (width-scaled), bold
  */
 export const Heading = ({
   color = NEAR_BLACK,
@@ -86,6 +94,7 @@ export const Heading = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[
       styles.heading,
       { color, fontSize, lineHeight: LineHeight.xxl },
@@ -98,8 +107,8 @@ export const Heading = ({
 );
 
 /**
- * Sub-heading / card title — medium weight, slightly smaller.
- * Default: 20px semi-bold
+ * Sub-heading / card title — semi-bold.
+ * Default: ~20px (width-scaled)
  */
 export const SubHeading = ({
   color = NEAR_BLACK,
@@ -109,6 +118,7 @@ export const SubHeading = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[
       styles.subHeading,
       { color, fontSize, lineHeight: LineHeight.lg },
@@ -121,8 +131,8 @@ export const SubHeading = ({
 );
 
 /**
- * Body paragraph — regular weight, readable line-height.
- * Default: 15px regular
+ * Body paragraph — regular weight, comfortable line-height.
+ * Default: ~15px (width-scaled)
  */
 export const Paragraph = ({
   color = GRAY_500,
@@ -132,6 +142,7 @@ export const Paragraph = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[
       styles.paragraph,
       { color, fontSize, lineHeight: LineHeight.base },
@@ -144,8 +155,8 @@ export const Paragraph = ({
 );
 
 /**
- * Small caption / label text.
- * Default: 11px regular
+ * Small caption / label.
+ * Default: ~11px (width-scaled)
  */
 export const SmallText = ({
   color = GRAY_500,
@@ -155,6 +166,7 @@ export const SmallText = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[
       styles.small,
       { color, fontSize, lineHeight: LineHeight.xs },
@@ -167,8 +179,8 @@ export const SmallText = ({
 );
 
 /**
- * Small header / overline — uppercase, spaced, semi-bold.
- * Useful above sections as a label.
+ * Overline / section label — uppercase, tracked, semi-bold.
+ * Default: ~11px (width-scaled)
  */
 export const SmallHeader = ({
   color = GRAY_500,
@@ -178,6 +190,7 @@ export const SmallHeader = ({
   ...rest
 }: AppTextProps) => (
   <Text
+    maxFontSizeMultiplier={MAX_FONT_SCALE}
     style={[
       styles.smallHeader,
       { color, fontSize },
